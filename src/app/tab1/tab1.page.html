@@ -1,0 +1,103 @@
+<ion-content [fullscreen]="true">
+  <ion-refresher
+    slot="fixed"
+    pullFactor="0.5"
+    pullMin="100"
+    pullMax="200"
+    (ionRefresh)="doRefresh($event)"
+  >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <ion-card *ngIf="show">
+          <img src="../../assets/chill.svg" style="padding: 25px" alt="" />
+          <ion-card-header (click)="view(order)">
+            <ion-card-title style="font-family: Semi-bold"
+              >NO ORDERS YET</ion-card-title
+            >
+            <ion-card-subtitle style="font-family: Semi-bold"
+              >You may drag down to refresh this page or wait for orders to
+              Come</ion-card-subtitle
+            >
+          </ion-card-header></ion-card
+        >
+      </div>
+    </div>
+  </div>
+  <ion-list>
+    <ion-searchbar *ngIf="!show" (ionChange)="Search($event)"></ion-searchbar>
+
+    <ion-item lines="none" *ngFor="let order of orders; let i = index">
+      <ion-card *ngIf="!show" style="border-radius: 18px; width: 95%">
+        <ion-card-header (click)="view(order, i)">
+          <ion-card-title
+            style="font-family: Semi-bold"
+            *ngIf="order.order_flower == 'Generated Flower Bouquet'"
+            >CUSTOM (For {{order.order_payment}})</ion-card-title
+          >
+
+          <ion-card-title
+            style="font-family: Semi-bold"
+            *ngIf="order.order_flower != 'Generated Flower Bouquet'"
+            >QUICK (For {{order.order_payment}})</ion-card-title
+          >
+          <ion-card-subtitle
+            >{{order.user_firstname}} {{order.user_lastname}}</ion-card-subtitle
+          >
+
+          <ion-card-subtitle
+            >{{order.order_date}} {{order.order_time}}</ion-card-subtitle
+          >
+          <ion-card-subtitle>{{order.order_contact}}</ion-card-subtitle>
+        </ion-card-header>
+        <br />
+
+        <ion-card-content>
+          <ion-grid class="ion-no-padding">
+            <ion-row>
+              <ion-col class="ion-text-left">
+                <h1>₱ {{order.order_totalprice| number:'1.2-2'}}</h1>
+              </ion-col>
+              <ion-col class="ion-text-right">
+                <h3 style="font-family: Semi-bold; padding: 5px">
+                  {{order.order_status}}
+                </h3>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-text-left">
+                <!-- <ion-button
+                  color="primary"
+                  *ngIf="order.order_status == 'toPay'"
+                  (click)="change('Accepted',order.order_id)"
+                  >Accept</ion-button
+                >
+                <ion-button
+                  color="primary"
+                  *ngIf="order.order_status == 'toPay'"
+                  (click)="change('Rejected',order.order_id)"
+                  >Reject</ion-button
+                >
+                <ion-button
+                  color="primary"
+                  *ngIf="order.order_status == 'Paid'"
+                  (click)="change('Ready',order.order_id)"
+                  >Ready for Pick up/Delivery</ion-button
+                >
+                <ion-button
+                  color="primary"
+                  *ngIf="order.order_status == 'Ready'"
+                  (click)="change('Completed',order.order_id)"
+                  >Completed</ion-button
+                > -->
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,166 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>View</ion-title>
+    <ion-router-link
+      (click)="back()"
+      slot="end"
+      class="underline"
+      style="margin: 10px"
+      >Back</ion-router-link
+    >
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <ion-card-header>
+    <ion-icon name="arrow-back-outline" (click)="back()"></ion-icon>
+  </ion-card-header>
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <div>
+          <ion-slides pager="false" [options]="slideOpts">
+            <ion-slide id="foo">
+              <ion-card style="width: 330px">
+                <ion-card-header> </ion-card-header>
+
+                <ion-card-content>
+                  <div *ngIf="!show" [innerHtml]="content"></div>
+                  <img *ngIf="show" [src]="link" />
+                </ion-card-content>
+              </ion-card>
+            </ion-slide>
+          </ion-slides>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <div>
+          <!-- <ion-card style="width: 330px; margin: auto">
+            <ion-card-header> </ion-card-header>
+
+            <ion-card-content>
+              <div *ngIf="!show" [innerHtml]="content"></div>
+              <img *ngIf="show" [src]="link" />
+            </ion-card-content>
+          </ion-card> -->
+          <br />
+
+          <ion-grid>
+            <ion-row class="p-3">
+              <ion-col>
+                <ion-button
+                  color="primary"
+                  *ngIf="status == 'Verifying Payment'"
+                  (click)="change('Paid')"
+                  style="float: right"
+                  >Accept</ion-button
+                >
+                <ion-button
+                  color="primary"
+                  *ngIf="status == 'Verifying Payment'"
+                  (click)="change('Rejected')"
+                  style="float: right"
+                  >Reject</ion-button
+                >
+                <ion-button
+                  color="primary"
+                  *ngIf="status == 'Paid'"
+                  (click)="change('Ready')"
+                  style="float: right"
+                  >Ready
+                  <ion-icon name="golf" style="padding-left: 15px"></ion-icon
+                ></ion-button>
+                <ion-button
+                  color="primary"
+                  *ngIf="status == 'Ready'"
+                  (click)="change('Completed')"
+                  style="float: right"
+                  >Completed</ion-button
+                >
+
+                <ion-text>
+                  <h5 style="font-family: Semi-bold">Recipient Details</h5>
+
+                  <h6 class="mx-auto mt-2" *ngIf="!recipient">
+                    Recipient:
+                    <small style="font-family: Semi-bold"
+                      >{{person|titlecase}}</small
+                    >
+                  </h6>
+                  <h6 class="mx-auto mt-2" *ngIf="recipient">
+                    Recipient:
+                    <small style="font-family: Semi-bold"
+                      >{{recipient|titlecase}}</small
+                    >
+                  </h6>
+                  <h6 class="mx-auto mt-2">
+                    Contact:
+                    <small style="font-family: Semi-bold">{{contact}}</small>
+                  </h6>
+                  <h6 class="mx-auto mt-2" *ngIf="address">
+                    Delivery Address:
+                    <small style="font-family: Semi-bold"
+                      >{{address|titlecase}}
+                    </small>
+                  </h6>
+                  <h6 class="mx-auto mt-2" *ngIf="landmark">
+                    Delivery Address (LANDMARK):
+                    <small style="font-family: Semi-bold"
+                      >{{landmark|titlecase}}
+                    </small>
+                  </h6>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row class="pl-3 pr-3">
+              <ion-col>
+                <ion-text>
+                  <h5 style="font-family: Semi-bold">Order Details</h5>
+
+                  <h6 class="mx-auto mt-2">
+                    Order Message:
+                    <small style="font-family: Semi-bold">
+                      <b>{{message|titlecase}}</b>
+                    </small>
+                  </h6>
+
+                  <h6 class="mx-auto mt-2">
+                    Order Purpose:
+                    <small style="font-family: Semi-bold">
+                      <b>{{purpose|titlecase}}</b>
+                    </small>
+                  </h6>
+
+                  <h6 class="mx-auto mt-2">
+                    Order Date and Time:
+                    <small style="font-family: Semi-bold"
+                      >{{date|date}} at {{time}}
+                    </small>
+                  </h6>
+                  <h6 class="mx-auto mt-2">
+                    Grand Total:
+                    <small style="font-family: Semi-bold">
+                      ₱ {{total| number:'1.2-2'}}</small
+                    >
+                  </h6>
+                  <h6 class="mx-auto">
+                    Status:
+                    <small style="font-family: Semi-bold">{{status}}</small>
+                  </h6>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border myColor" color="primary">
+  <!-- <ion-button (click)="mode()">Checkout</ion-button> -->
+  <h6 (click)="photo()" style="padding: 10px">Check Proof of Payment</h6>
+</ion-footer>

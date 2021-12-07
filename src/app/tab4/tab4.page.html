@@ -1,0 +1,69 @@
+<ion-content [fullscreen]="true">
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <ion-card *ngIf="show">
+          <img src="../../assets/chill.svg" style="padding: 25px" alt="" />
+          <ion-card-header (click)="view(order)">
+            <ion-card-title style="font-family: Semi-bold"
+              >NO COMPLETED ORDERS YET</ion-card-title
+            >
+            <ion-card-subtitle style="font-family: Semi-bold"
+              >You may drag down to refresh this page or wait for orders to be
+              Completed</ion-card-subtitle
+            >
+          </ion-card-header></ion-card
+        >
+      </div>
+    </div>
+  </div>
+  <ion-list>
+    <ion-searchbar *ngIf="!show" (ionChange)="Search($event)"></ion-searchbar>
+    <ion-item lines="none" *ngFor="let order of orders">
+      <ion-card *ngIf="!show" style="border-radius: 18px; width: 95%">
+        <ion-card-header>
+          <ion-card-title
+            style="font-family: Semi-bold"
+            *ngIf="order.order_flower == 'Generated Flower Bouquet'"
+            >CUSTOM (For {{order.order_payment}})</ion-card-title
+          >
+
+          <ion-card-title
+            style="font-family: Semi-bold"
+            *ngIf="order.order_flower != 'Generated Flower Bouquet'"
+            >QUICK (For {{order.order_payment}})</ion-card-title
+          >
+          <ion-card-subtitle
+            >{{order.user_firstname}} {{order.user_lastname}}</ion-card-subtitle
+          >
+
+          <ion-card-subtitle
+            >{{order.order_date}} {{order.order_time}}</ion-card-subtitle
+          >
+          <ion-card-subtitle>{{order.order_contact}}</ion-card-subtitle>
+        </ion-card-header>
+        <br />
+
+        <ion-card-content>
+          <ion-grid class="ion-no-padding">
+            <ion-row>
+              <ion-col class="ion-text-left">
+                <h1>₱ {{order.order_totalprice| number:'1.2-2'}}</h1>
+              </ion-col>
+              <ion-col class="ion-text-right">
+                <h3 style="font-family: Semi-bold; padding: 5px">
+                  {{order.order_status}}
+                </h3>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="logout()">
+    <ion-fab-button color="danger">
+      <ion-icon name="power-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

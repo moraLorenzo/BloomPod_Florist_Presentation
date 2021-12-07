@@ -1,0 +1,53 @@
+<ion-content [fullscreen]="true">
+  <ion-searchbar (ionChange)="Search($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item lines="none" *ngFor="let bouquet of bouquets; let i =index">
+      <ion-card style="border-radius: 18px; width: 95%">
+        <img
+          class="center"
+          src="http://bloompod.api.gc-ecommerceapp.com/bloompod_api/quick/{{bouquet.quick_name | titlecase }}.jpg"
+          style="opacity: 0.3"
+        />
+        <div class="bottom-left">
+          <ion-card-header>
+            <ion-card-title style="font-family: Semi-bold"
+              >{{bouquet.quick_name | titlecase }}</ion-card-title
+            >
+
+            <ion-card-subtitle
+              >Price: ₱ {{bouquet.quick_price |
+              number:'1.2-2'}}</ion-card-subtitle
+            >
+
+            <ion-chip
+              color="success"
+              *ngIf="bouquet.is_available == 1"
+              (click)="update_status(!bouquet.is_available,i,bouquet.quick_id,bouquet)"
+            >
+              <ion-label>Available</ion-label>
+            </ion-chip>
+
+            <ion-chip
+              color="danger"
+              *ngIf="bouquet.is_available != 1"
+              (click)="update_status(!bouquet.is_available,i,bouquet.quick_id,bouquet)"
+            >
+              <ion-label>Not Available</ion-label>
+            </ion-chip>
+          </ion-card-header>
+        </div>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+    [routerLink]="['/add-flower']"
+  >
+    <ion-fab-button>
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
