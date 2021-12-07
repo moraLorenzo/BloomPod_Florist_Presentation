@@ -4,7 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class UserService {
-  public apiLink: string = 'http://192.168.100.128/bloompod_api/';
+  public apiLink: string =
+    'http://bloompod.api.gc-ecommerceapp.com/bloompod_api/';
 
   public name: string;
   private token: string;

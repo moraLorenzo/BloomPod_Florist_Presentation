@@ -4,5 +4,6 @@
         <domain includeSubdomains="true">localhost</domain>
         <domain includeSubdomains="true">192.168.100.128</domain>
         <domain includeSubdomains="true">192.168.1.45</domain>
+        <domain includeSubdomains="true">bloompod.api.gc-ecommerceapp.com</domain>
     </domain-config>
 </network-security-config>
