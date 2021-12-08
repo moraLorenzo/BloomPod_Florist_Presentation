@@ -58,6 +58,8 @@ export class AddPage implements OnInit {
     console.log(this.res);
     if (this.res.message == 'UPLOAD SUCCEED') {
       console.log(this.res.message);
+      this.imgURL = '';
+      e.target.reset();
       this.router.navigate(['tabs/tab4']);
     } else {
       console.log(this.res.message);

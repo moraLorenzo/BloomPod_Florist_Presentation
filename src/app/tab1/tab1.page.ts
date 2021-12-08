@@ -26,7 +26,6 @@ export class Tab1Page {
     this.getAll();
   }
   getAll() {
-    console.log('hello');
     this.dataService
       .processData(btoa('getAllOrders').replace('=', ''), null, 2)
       .subscribe(
@@ -37,10 +36,8 @@ export class Tab1Page {
           try {
             if (load.payload.orders) {
               this.show = false;
-              console.log(load.payload.orders);
 
               this.orders = load.payload.orders.reverse();
-              console.log(this.orders.reverse());
             }
           } catch (err) {
             this.show = true;
@@ -53,14 +50,6 @@ export class Tab1Page {
   }
 
   async view(order_obj: any, index: any) {
-    console.log(order_obj);
-    console.log(index);
-    // this.router.navigate(['view'], {
-    //   state: {
-    //     data: order_obj,
-    //   },
-    // });
-
     const modal = await this.modalController.create({
       component: ViewPage,
       componentProps: { order_obj: order_obj },
@@ -86,31 +75,7 @@ export class Tab1Page {
     return await modal.present();
   }
 
-  // change(status: string, order_id: any) {
-  //   // console.log('hello');
-  //   this.dataService
-  //     .processData(
-  //       btoa('change_status').replace('=', ''),
-  //       { status, order_id },
-  //       2
-  //     )
-  //     .subscribe(
-  //       (dt: any) => {
-  //         // console.log(dt.a);
-  //         let load = this.dataService.decrypt(dt.a);
-  //         // console.log(load.msg);
-  //         if (load.msg == 'Successfully Updated') {
-  //           this.getAll();
-  //         }
-  //       },
-  //       (er) => {
-  //         console.log('Invalid Inputs');
-  //       }
-  //     );
-  // }
-
   Search(event) {
-    // console.log(event.detail.value);
     if (event.detail.value == '') {
       this.ionViewWillEnter();
     } else {
@@ -140,7 +105,7 @@ export class Tab1Page {
         (dt: any) => {
           // console.log(dt.a);
           let load = this.dataService.decrypt(dt.a);
-
+          // console.log(load);
           try {
             if (load.payload.orders) {
               this.show = false;

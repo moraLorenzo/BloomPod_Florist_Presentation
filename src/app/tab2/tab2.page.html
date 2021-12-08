@@ -1,9 +1,10 @@
 <ion-content [fullscreen]="true">
   <ion-searchbar (ionChange)="Search($event)"></ion-searchbar>
   <ion-list>
-    <ion-item lines="none" *ngFor="let flower of flowers">
+    <ion-item lines="none" *ngFor="let flower of flowers; let i = index">
       <ion-card style="border-radius: 18px; width: 95%">
         <img
+          (click)="update(flower,i)"
           class="center"
           src="http://bloompod.api.gc-ecommerceapp.com/bloompod_api/flowers/{{flower.flower_name}}.png"
         />
@@ -26,11 +27,19 @@
             >Not Available</ion-card-subtitle
           > -->
 
-          <ion-chip color="success" *ngIf="flower.is_available == 1">
+          <ion-chip
+            color="success"
+            *ngIf="flower.is_available == 1"
+            (click)="update_status(!flower.is_available,i,flower.flower_id,flower)"
+          >
             <ion-label>Available</ion-label>
           </ion-chip>
 
-          <ion-chip color="danger" *ngIf="flower.is_available != 1">
+          <ion-chip
+            color="danger"
+            *ngIf="flower.is_available != 1"
+            (click)="update_status(!flower.is_available,i,flower.flower_id,flower)"
+          >
             <ion-label>Not Available</ion-label>
           </ion-chip>
         </ion-card-header>

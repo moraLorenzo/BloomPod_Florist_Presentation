@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { DataService } from '../services/data/data.service';
+import { UpdateFlowerPage } from '../update-flower/update-flower.page';
 
 @Component({
   selector: 'app-tab3',
@@ -14,7 +15,8 @@ export class Tab3Page {
   constructor(
     private dataService: DataService,
     private router: Router,
-    public alertController: AlertController
+    public alertController: AlertController,
+    public modalController: ModalController
   ) {}
 
   ionViewWillEnter() {
@@ -137,5 +139,50 @@ export class Tab3Page {
     });
 
     await alert.present();
+  }
+
+  async update(quick_obj: any, index: any) {
+    const modal = await this.modalController.create({
+      component: UpdateFlowerPage,
+      componentProps: {
+        quick_obj,
+      },
+      cssClass: 'my-custom-class',
+    });
+
+    modal.onDidDismiss().then((data) => {
+      const update_obj = data['data'];
+
+      if (update_obj) {
+        console.log(update_obj);
+        this.dataService
+          .processData(
+            btoa('update_quick').replace('=', ''),
+            {
+              quick_id: quick_obj.quick_id,
+              quick_name: update_obj.quick_name,
+              quick_price: update_obj.quick_price,
+              quick_details: update_obj.quick_details,
+            },
+            2
+          )
+          .subscribe(
+            (dt: any) => {
+              let load = this.dataService.decrypt(dt.a);
+              console.log(load);
+              this.bouquets.splice(index, 1, update_obj);
+              // this.presentToast('Record Successfully Updated');
+            },
+            (er) => {
+              console.log(er);
+              console.log('Invalid Inputs');
+            }
+          );
+      } else {
+        console.log('walang laman');
+      }
+    });
+
+    return await modal.present();
   }
 }

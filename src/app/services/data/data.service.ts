@@ -127,4 +127,21 @@ export class DataService {
     }
     return await this.http.post(URL, formData).toPromise();
   }
+
+  public async addQuick(update: any) {
+    const formData = new FormData();
+    formData.append('quick_name', update.quick_name);
+    formData.append('quick_price', update.quick_price);
+    formData.append('quick_details', update.quick_details);
+
+    const URL =
+      'http://bloompod.api.gc-ecommerceapp.com/bloompod_api/YWRkX3F1aWNr';
+
+    if (update.quick_img) {
+      const posterFile = await fetch(update.quick_img);
+      const blob = await posterFile.blob();
+      formData.append('quick_img', blob);
+    }
+    return await this.http.post(URL, formData).toPromise();
+  }
 }

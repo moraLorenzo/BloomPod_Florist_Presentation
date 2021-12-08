@@ -44,6 +44,14 @@ const routes: Routes = [
     path: 'add-flower',
     loadChildren: () => import('./add-flower/add-flower.module').then( m => m.AddFlowerPageModule)
   },
+  {
+    path: 'update',
+    loadChildren: () => import('./update/update.module').then( m => m.UpdatePageModule)
+  },
+  {
+    path: 'update-flower',
+    loadChildren: () => import('./update-flower/update-flower.module').then( m => m.UpdateFlowerPageModule)
+  },
 ];
 @NgModule({
   imports: [

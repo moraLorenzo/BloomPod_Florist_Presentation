@@ -41,7 +41,7 @@ export class LoginPage implements OnInit {
         (dt: any) => {
           // console.log(dt.a);
           let load = this.dataService.decrypt(dt.a);
-          console.log(load);
+          // console.log(load);
           if (load.status.remarks == 'success') {
             this.presentToast(load.status.message);
             this.userService.setUser(load.payload.name[0]);

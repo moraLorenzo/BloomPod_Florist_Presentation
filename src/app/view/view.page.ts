@@ -105,14 +105,15 @@ export class ViewPage implements OnInit {
       }
     } else {
       this.link =
-        'http://192.168.100.128/bloompod_api/quick/' +
+        'http://bloompod.api.gc-ecommerceapp.com/bloompod_api/quick/' +
         this.order_obj.order_flower +
         '.jpg';
       this.show = true;
     }
 
     this.payment =
-      'http://192.168.100.128/bloompod_api/images/' + this.order_obj.payment;
+      'http://bloompod.api.gc-ecommerceapp.com/bloompod_api/images/' +
+      this.order_obj.payment;
   }
 
   back() {

@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back-outline" (click)="close()"></ion-icon>
+    </ion-buttons>
+
+    <ion-title>Update Page</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Flower Name</ion-label>
+    <ion-input
+      type="email"
+      placeholder="Enter Input"
+      [(ngModel)]="flower_name"
+      disabled
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Flower Price</ion-label>
+    <ion-input
+      type="number"
+      placeholder="Enter Input"
+      [(ngModel)]="flower_price"
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Flower Quantity</ion-label>
+    <ion-input
+      type="number"
+      placeholder="Enter Input"
+      [(ngModel)]="flower_qty"
+    ></ion-input>
+  </ion-item>
+
+  <ion-fab
+    horizontal="end"
+    style="position: absolute; bottom: 25px"
+    slot="fixed"
+    edge
+  >
+    <ion-fab-button
+      ><ion-icon name="arrow-up-outline" (click)="dismiss()"></ion-icon
+    ></ion-fab-button>
+  </ion-fab>
+</ion-content>

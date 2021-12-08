@@ -5,7 +5,8 @@
       <ion-card style="border-radius: 18px; width: 95%">
         <img
           class="center"
-          src="http://bloompod.api.gc-ecommerceapp.com/bloompod_api/quick/{{bouquet.quick_name | titlecase }}.jpg"
+          (click)="update(bouquet,i)"
+          src="http://bloompod.api.gc-ecommerceapp.com/bloompod_api/quick/{{bouquet.quick_name}}.jpg"
           style="opacity: 0.3"
         />
         <div class="bottom-left">
