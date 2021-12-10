@@ -21,7 +21,7 @@
     <ion-searchbar *ngIf="!show" (ionChange)="Search($event)"></ion-searchbar>
     <ion-item lines="none" *ngFor="let order of orders">
       <ion-card *ngIf="!show" style="border-radius: 18px; width: 95%">
-        <ion-card-header>
+        <ion-card-header (click)="view(order, i)">
           <ion-card-title
             style="font-family: Semi-bold"
             *ngIf="order.order_flower == 'Generated Flower Bouquet'"

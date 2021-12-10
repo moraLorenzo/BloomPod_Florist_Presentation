@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { fakeAsync } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data/data.service';
@@ -10,6 +11,8 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  checkBox: boolean = false;
+  passwordType: string = 'password';
   constructor(
     private dataService: DataService,
     private router: Router,
@@ -63,5 +66,10 @@ export class LoginPage implements OnInit {
       duration: 2000,
     });
     toast.present();
+  }
+
+  onChange() {
+    console.log(this.checkBox);
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
   }
 }

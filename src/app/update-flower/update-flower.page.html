@@ -8,41 +8,60 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-item>
-    <ion-label position="floating">Bouquet Name</ion-label>
-    <ion-input
-      type="email"
-      placeholder="Enter Input"
-      [(ngModel)]="quick_name"
-      disabled
-    ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Bouquet Price</ion-label>
-    <ion-input
-      type="number"
-      placeholder="Enter Input"
-      [(ngModel)]="quick_price"
-    ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Bouquet Details</ion-label>
-    <ion-input
-      type="text"
-      placeholder="Enter Input"
-      [(ngModel)]="quick_details"
-    ></ion-input>
-  </ion-item>
+<div class="container h-100">
+  <div class="d-flex justify-content-center h-100">
+    <div class="user_card">
+      <div class="d-flex justify-content-center form_container">
+        <form ngNativeValidate (submit)="dismiss()">
+          <div class="input-group mb-3">
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input
+              type="text"
+              name=""
+              class="form-control input_user"
+              value=""
+              [(ngModel)]="quick_name"
+              [ngModelOptions]="{standalone: true}"
+              disabled
+            />
+          </div>
+          <div class="input-group mb-2">
+            <div class="input-group-append">
+              <span class="input-group-text">₱</span>
+            </div>
+            <input
+              name=""
+              class="form-control input_pass"
+              value=""
+              type="number"
+              step="any"
+              [(ngModel)]="quick_price"
+              [ngModelOptions]="{standalone: true}"
+              required
+            />
+          </div>
 
-  <ion-fab
-    horizontal="end"
-    style="position: absolute; bottom: 25px"
-    slot="fixed"
-    edge
-  >
-    <ion-fab-button
-      ><ion-icon name="arrow-up-outline" (click)="dismiss()"></ion-icon
-    ></ion-fab-button>
-  </ion-fab>
-</ion-content>
+          <div class="input-group mb-2">
+            <div class="input-group-append">
+              <span class="input-group-text">?</span>
+            </div>
+
+            <textarea
+              class="form-control input_pass"
+              rows="5"
+              [(ngModel)]="quick_details"
+              [ngModelOptions]="{standalone: true}"
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" name="button" class="btn login_btn">
+            Update
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

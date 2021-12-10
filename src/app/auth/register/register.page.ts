@@ -9,6 +9,8 @@ import { DataService } from 'src/app/services/data/data.service';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+  checkBox: boolean = false;
+  passwordType: string = 'password';
   constructor(
     private dataService: DataService,
     private router: Router,
@@ -55,5 +57,10 @@ export class RegisterPage implements OnInit {
       duration: 2000,
     });
     toast.present();
+  }
+
+  onChange() {
+    console.log(this.checkBox);
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
   }
 }
