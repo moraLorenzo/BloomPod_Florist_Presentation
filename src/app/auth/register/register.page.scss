@@ -11,7 +11,7 @@ html {
   width: 350px;
   margin-top: auto;
   margin-bottom: auto;
-  background: #d0a9e9;
+  background: #44dcb6;
   position: relative;
   display: flex;
   justify-content: center;
@@ -30,7 +30,7 @@ html {
   width: 170px;
   top: -75px;
   border-radius: 50%;
-  background: #a54497;
+  background: white;
   padding: 10px;
   text-align: center;
 }
@@ -45,7 +45,7 @@ html {
 }
 .login_btn {
   width: 100%;
-  background: #2a0147 !important;
+  background: #007f80 !important;
   color: white !important;
 }
 .login_btn:focus {
@@ -56,7 +56,7 @@ html {
   padding: 0 2rem;
 }
 .input-group-text {
-  background: #2a0147 !important;
+  background: #007f80 !important;
   color: white !important;
   border: 0 !important;
   border-radius: 0.25rem 0 0 0.25rem !important;
@@ -67,5 +67,5 @@ html {
   outline: 0px !important;
 }
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: #2a0147 !important;
+  background-color: #007f80 !important;
 }

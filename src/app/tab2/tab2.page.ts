@@ -75,7 +75,7 @@ export class Tab2Page {
       header: 'Attention!',
       message:
         'Do you CONFIRM to set the status of <u>' +
-        flower_obj.quick_name +
+        flower_obj.flower_name +
         '</u> to <strong>' +
         msg +
         '</strong>?',

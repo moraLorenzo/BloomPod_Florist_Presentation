@@ -27,7 +27,7 @@
       </div>
     </div>
   </div>
-  <ion-list>
+  <!-- <ion-list>
     <ion-searchbar *ngIf="!show" (ionChange)="Search($event)"></ion-searchbar>
 
     <ion-item lines="none" *ngFor="let order of orders; let i = index">
@@ -69,35 +69,90 @@
             </ion-row>
             <ion-row>
               <ion-col class="ion-text-left">
-                <!-- <ion-button
-                  color="primary"
-                  *ngIf="order.order_status == 'toPay'"
-                  (click)="change('Accepted',order.order_id)"
-                  >Accept</ion-button
-                >
-                <ion-button
-                  color="primary"
-                  *ngIf="order.order_status == 'toPay'"
-                  (click)="change('Rejected',order.order_id)"
-                  >Reject</ion-button
-                >
-                <ion-button
-                  color="primary"
-                  *ngIf="order.order_status == 'Paid'"
-                  (click)="change('Ready',order.order_id)"
-                  >Ready for Pick up/Delivery</ion-button
-                >
-                <ion-button
-                  color="primary"
-                  *ngIf="order.order_status == 'Ready'"
-                  (click)="change('Completed',order.order_id)"
-                  >Completed</ion-button
-                > -->
+
               </ion-col>
             </ion-row>
           </ion-grid>
         </ion-card-content>
       </ion-card>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
+
+  <div class="main-content">
+    <div class="header bg-gradient-primary pb-4 pt-5 pt-md-8">
+      <div class="container-fluid">
+        <h2 class="mb-3">ORDERS</h2>
+        <ion-searchbar
+          *ngIf="!show"
+          (ionChange)="Search($event)"
+        ></ion-searchbar>
+        <br />
+        <div class="header-body">
+          <div class="row" *ngFor="let order of orders; let i = index">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body" (click)="view(order, i)">
+                <div class="row">
+                  <div class="col">
+                    <h5
+                      class="card-title text-uppercase text-muted mb-0"
+                      style="font-family: Semi-bold"
+                      *ngIf="order.order_flower == 'Generated Flower Bouquet'"
+                    >
+                      CUSTOM (For {{order.order_payment}})
+                    </h5>
+                    <h5
+                      class="card-title text-uppercase text-muted mb-0"
+                      style="font-family: Semi-bold"
+                      *ngIf="order.order_flower != 'Generated Flower Bouquet'"
+                    >
+                      QUICK (For {{order.order_payment}})
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0"
+                      >{{order.user_firstname}} {{order.user_lastname}}</span
+                    >
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="icon icon-shape text-white rounded-circle shadow"
+                      style="background-color: #44dcb6"
+                    >
+                      <ion-icon name="flower-outline" size="large"></ion-icon>
+                    </div>
+                    <div
+                      class="
+                        icon icon-shape
+                        text-white
+                        rounded-circle
+                        shadow
+                        ml-1
+                      "
+                      style="background-color: #44dcb6"
+                    >
+                      <ion-icon
+                        name="arrow-up-outline"
+                        *ngIf="order.order_payment == 'Pick Up'"
+                        size="large"
+                      ></ion-icon>
+                      <ion-icon
+                        name="car-outline"
+                        *ngIf="order.order_payment == 'Delivery'"
+                        size="large"
+                      ></ion-icon>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                  <span class="text-success mr-2"
+                    ><i class="fa fa-arrow-up"></i> {{order.order_date | date}}
+                  </span>
+                  <span class="text-nowrap">at {{order.order_time}}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+  </div>
 </ion-content>

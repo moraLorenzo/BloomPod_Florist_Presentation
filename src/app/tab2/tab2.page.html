@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
-  <ion-searchbar (ionChange)="Search($event)"></ion-searchbar>
-  <ion-list>
+  <!-- <ion-searchbar (ionChange)="Search($event)"></ion-searchbar> -->
+  <!-- <ion-list>
     <ion-item lines="none" *ngFor="let flower of flowers; let i = index">
       <ion-card style="border-radius: 18px; width: 95%">
         <img
@@ -19,14 +19,6 @@
             >Price: ₱ {{flower.flower_price |
             number:'1.2-2'}}</ion-card-subtitle
           >
-
-          <!-- <ion-card-subtitle *ngIf="flower.is_available == 1"
-            >Available</ion-card-subtitle
-          >
-          <ion-card-subtitle *ngIf="flower.is_available != 1"
-            >Not Available</ion-card-subtitle
-          > -->
-
           <ion-chip
             color="success"
             *ngIf="flower.is_available == 1"
@@ -45,7 +37,66 @@
         </ion-card-header>
       </ion-card>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
+
+  <div class="main-content">
+    <div class="header bg-gradient-primary pb-4 pt-5 pt-md-8">
+      <div class="container-fluid">
+        <h2 class="mb-3">FLOWERS</h2>
+        <ion-searchbar
+          *ngIf="!show"
+          (ionChange)="Search($event)"
+        ></ion-searchbar>
+        <br />
+        <div class="header-body">
+          <div class="row" *ngFor="let flower of flowers; let i = index">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5
+                      class="card-title text-uppercase text-muted mb-0"
+                      style="font-family: Semi-bold"
+                    >
+                      Price: ₱ {{flower.flower_price | number:'1.2-2'}}
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">
+                      {{flower.flower_name |replaceUnderscore | titlecase
+                      }}</span
+                    >
+                  </div>
+                  <div class="col-auto">
+                    <img
+                      (click)="update(flower,i)"
+                      src="http://bloompod.api.gc-ecommerceapp.com/bloompod_api/flowers/{{flower.flower_name}}.png"
+                    />
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                  <ion-chip
+                    color="success"
+                    *ngIf="flower.is_available == 1"
+                    (click)="update_status(!flower.is_available,i,flower.flower_id,flower)"
+                  >
+                    <ion-label>Available</ion-label>
+                  </ion-chip>
+
+                  <ion-chip
+                    color="danger"
+                    *ngIf="flower.is_available != 1"
+                    (click)="update_status(!flower.is_available,i,flower.flower_id,flower)"
+                  >
+                    <ion-label>Not Available</ion-label>
+                  </ion-chip>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+  </div>
 
   <ion-fab
     vertical="bottom"

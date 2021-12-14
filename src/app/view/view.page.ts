@@ -34,6 +34,8 @@ export class ViewPage implements OnInit {
   show: boolean = false;
   link: string = '';
 
+  mode: any;
+
   recipient: string;
 
   constructor(
@@ -68,6 +70,7 @@ export class ViewPage implements OnInit {
     this.status = this.order_obj.order_status;
 
     this.recipient = this.order_obj.order_recipient;
+    this.mode = this.order_obj.order_payment;
 
     if (this.order_obj.order_flower == 'Generated Flower Bouquet') {
       if (this.order_obj.quantity == 6) {

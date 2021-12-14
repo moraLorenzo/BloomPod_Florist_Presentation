@@ -63,4 +63,8 @@ export class RegisterPage implements OnInit {
     console.log(this.checkBox);
     this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
   }
+
+  back() {
+    this.router.navigate(['login']);
+  }
 }

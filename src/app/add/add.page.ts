@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { ToastController } from '@ionic/angular';
 import { Flower } from '../models/flower';
 import { DataService } from '../services/data/data.service';
 @Component({
@@ -14,7 +15,8 @@ export class AddPage implements OnInit {
   constructor(
     private router: Router,
     private camera: Camera,
-    public dataService: DataService
+    public dataService: DataService,
+    public toastController: ToastController
   ) {
     this.flowerPayload = new Flower();
   }
@@ -52,17 +54,30 @@ export class AddPage implements OnInit {
     this.flowerPayload.flower_name = e.target[0].value;
     this.flowerPayload.flower_price = e.target[1].value;
     this.flowerPayload.flower_qty = e.target[2].value;
-    this.flowerPayload.flower_img = this.imgURL;
 
-    this.res = await this.dataService.addImage(this.flowerPayload);
-    console.log(this.res);
-    if (this.res.message == 'UPLOAD SUCCEED') {
-      console.log(this.res.message);
-      this.imgURL = '';
-      e.target.reset();
-      this.router.navigate(['tabs/tab4']);
+    if (this.imgURL == undefined || this.imgURL == null) {
+      this.presentToast('Please Include an Image');
     } else {
-      console.log(this.res.message);
+      this.flowerPayload.flower_img = this.imgURL;
+
+      this.res = await this.dataService.addImage(this.flowerPayload);
+      console.log(this.res);
+      if (this.res.message == 'UPLOAD SUCCEED') {
+        this.presentToast(this.res.message);
+        this.imgURL = '';
+        e.target.reset();
+        this.router.navigate(['tabs/tab4']);
+      } else {
+        console.log(this.res.message);
+      }
     }
+  }
+
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000,
+    });
+    toast.present();
   }
 }

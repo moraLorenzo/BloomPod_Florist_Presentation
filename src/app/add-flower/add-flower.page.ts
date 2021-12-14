@@ -4,6 +4,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { DataService } from '../services/data/data.service';
 
 import { Quick } from '../models/quick';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-flower',
@@ -16,7 +17,8 @@ export class AddFlowerPage implements OnInit {
   constructor(
     private router: Router,
     private camera: Camera,
-    public dataService: DataService
+    public dataService: DataService,
+    public toastController: ToastController
   ) {
     this.quickPayload = new Quick();
   }
@@ -54,17 +56,30 @@ export class AddFlowerPage implements OnInit {
     this.quickPayload.quick_name = e.target[0].value;
     this.quickPayload.quick_price = e.target[1].value;
     this.quickPayload.quick_details = e.target[2].value;
-    this.quickPayload.quick_img = this.imgURL;
 
-    this.res = await this.dataService.addQuick(this.quickPayload);
-    console.log(this.res);
-    if (this.res.message == 'UPLOAD SUCCEED') {
-      console.log(this.res.message);
-      e.target.reset();
-      this.imgURL = '';
-      this.router.navigate(['tabs/tab3']);
+    if (this.imgURL == undefined || this.imgURL == null) {
+      this.presentToast('Please Include an Image');
     } else {
-      console.log(this.res.message);
+      this.quickPayload.quick_img = this.imgURL;
+
+      this.res = await this.dataService.addQuick(this.quickPayload);
+      console.log(this.res);
+      if (this.res.message == 'UPLOAD SUCCEED') {
+        console.log(this.res.message);
+        e.target.reset();
+        this.imgURL = '';
+        this.router.navigate(['tabs/tab3']);
+      } else {
+        console.log(this.res.message);
+      }
     }
+  }
+
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000,
+    });
+    toast.present();
   }
 }

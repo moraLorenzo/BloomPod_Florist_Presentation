@@ -37,7 +37,7 @@ export class Tab1Page {
             if (load.payload.orders) {
               this.show = false;
 
-              this.orders = load.payload.orders.reverse();
+              this.orders = load.payload.orders;
             }
           } catch (err) {
             this.show = true;
@@ -110,7 +110,7 @@ export class Tab1Page {
             if (load.payload.orders) {
               this.show = false;
 
-              this.orders = load.payload.orders.reverse();
+              this.orders = load.payload.orders;
               event.target.complete();
             }
           } catch (err) {

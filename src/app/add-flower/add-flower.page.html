@@ -16,7 +16,7 @@
   <div class="outer">
     <div class="middle">
       <div class="inner">
-        <div class="wrapper">
+        <!-- <div class="wrapper">
           <div class="top">
             <form
               style="width: 95%"
@@ -80,6 +80,84 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>
             </form>
+          </div>
+        </div> -->
+
+        <div class="container h-100">
+          <div class="d-flex justify-content-center h-100">
+            <div class="user_card">
+              <div class="d-flex justify-content-center form_container">
+                <form ngNativeValidate (submit)="add($event)">
+                  <div class="input-group mb-3">
+                    <div class="input-group-append">
+                      <span class="input-group-text"
+                        ><ion-icon name="flower-outline"></ion-icon
+                      ></span>
+                    </div>
+                    <input
+                      type="text"
+                      name=""
+                      class="form-control input_user"
+                      placeholder="Flower's Name"
+                      required
+                    />
+                  </div>
+                  <div class="input-group mb-2">
+                    <div class="input-group-append">
+                      <span class="input-group-text">₱</span>
+                    </div>
+                    <input
+                      name=""
+                      class="form-control input_pass"
+                      type="number"
+                      step="any"
+                      placeholder="Price"
+                      required
+                    />
+                  </div>
+
+                  <div class="input-group mb-2">
+                    <div class="input-group-append">
+                      <span class="input-group-text">Q</span>
+                    </div>
+
+                    <textarea
+                      name=""
+                      class="form-control input_pass"
+                      placeholder="Description"
+                      rows="8"
+                      type="number"
+                      step="any"
+                      required
+                    ></textarea>
+                  </div>
+
+                  <ion-card>
+                    <ion-card-header>
+                      <ion-card-title
+                        >Please Attach Flower Image</ion-card-title
+                      >
+                    </ion-card-header>
+                    <ion-card-content>
+                      <!-- <img src="../../assets/icon/favicon.png" class="center" /> -->
+                      <img [src]="imgURL" class="center" />
+                      <br />
+
+                      <ion-button
+                        fill="outline"
+                        class="internal"
+                        (click)="getGallery()"
+                        >Gallery</ion-button
+                      >
+                    </ion-card-content>
+                  </ion-card>
+
+                  <button type="submit" name="button" class="btn login_btn">
+                    Add
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </div>

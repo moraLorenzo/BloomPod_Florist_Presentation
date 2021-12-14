@@ -128,15 +128,15 @@
                     </small>
                   </h6>
 
-                  <h6 class="mx-auto mt-2">
+                  <!-- <h6 class="mx-auto mt-2">
                     Order Purpose:
                     <small style="font-family: Semi-bold">
                       <b>{{purpose|titlecase}}</b>
                     </small>
-                  </h6>
+                  </h6> -->
 
                   <h6 class="mx-auto mt-2">
-                    Order Date and Time:
+                    Date and Time of {{mode}}:
                     <small style="font-family: Semi-bold"
                       >{{date|date}} at {{time}}
                     </small>
@@ -160,7 +160,7 @@
     </div>
   </div>
 </ion-content>
-<ion-footer class="ion-no-border myColor" color="primary">
+<ion-footer class="ion-no-border myColor">
   <!-- <ion-button (click)="mode()">Checkout</ion-button> -->
   <h6 (click)="photo()" style="padding: 10px">Check Proof of Payment</h6>
 </ion-footer>
