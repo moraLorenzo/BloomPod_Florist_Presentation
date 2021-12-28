@@ -65,14 +65,101 @@
     <div class="header bg-gradient-primary pb-4 pt-5 pt-md-8">
       <div class="container-fluid">
         <h2 class="mb-3">COMPLETED ORDERS</h2>
+
+        <ion-segment [(ngModel)]="selectedTabs">
+          <ion-segment-button value="completed">
+            <ion-label>Completed</ion-label>
+          </ion-segment-button>
+
+          <ion-segment-button value="rejected">
+            <ion-label>Rejected</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+        <br />
+
         <ion-searchbar
           *ngIf="!show"
           (ionChange)="Search($event)"
         ></ion-searchbar>
         <br />
-        <div class="header-body">
+
+        <!-- completed -->
+        <div class="header-body" *ngIf="selectedTabs == 'completed'">
           <div class="row" *ngFor="let order of orders; let i = index">
-            <div class="card card-stats mb-4 mb-xl-0">
+            <div
+              class="card card-stats mb-4 mb-xl-0"
+              *ngIf="order.order_status == 'Completed'"
+            >
+              <div class="card-body" (click)="view(order, i)">
+                <div class="row">
+                  <div class="col">
+                    <h5
+                      class="card-title text-uppercase text-muted mb-0"
+                      style="font-family: Semi-bold"
+                      *ngIf="order.order_flower == 'Generated Flower Bouquet'"
+                    >
+                      CUSTOM (For {{order.order_payment}})
+                    </h5>
+                    <h5
+                      class="card-title text-uppercase text-muted mb-0"
+                      style="font-family: Semi-bold"
+                      *ngIf="order.order_flower != 'Generated Flower Bouquet'"
+                    >
+                      QUICK (For {{order.order_payment}})
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0"
+                      >{{order.user_firstname}} {{order.user_lastname}}</span
+                    >
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="icon icon-shape text-white rounded-circle shadow"
+                      style="background-color: #44dcb6"
+                    >
+                      <ion-icon name="flower-outline" size="large"></ion-icon>
+                    </div>
+                    <div
+                      class="
+                        icon icon-shape
+                        text-white
+                        rounded-circle
+                        shadow
+                        ml-1
+                      "
+                      style="background-color: #44dcb6"
+                    >
+                      <ion-icon
+                        name="arrow-up-outline"
+                        *ngIf="order.order_payment == 'Pick Up'"
+                        size="large"
+                      ></ion-icon>
+                      <ion-icon
+                        name="car-outline"
+                        *ngIf="order.order_payment == 'Delivery'"
+                        size="large"
+                      ></ion-icon>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                  <span class="text-success mr-2"
+                    ><i class="fa fa-arrow-up"></i> {{order.order_date | date}}
+                  </span>
+                  <span class="text-nowrap">at {{order.order_time}}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- rejected -->
+
+        <div class="header-body" *ngIf="selectedTabs == 'rejected'">
+          <div class="row" *ngFor="let order of orders; let i = index">
+            <div
+              class="card card-stats mb-4 mb-xl-0"
+              *ngIf="order.order_status == 'Rejected'"
+            >
               <div class="card-body" (click)="view(order, i)">
                 <div class="row">
                   <div class="col">

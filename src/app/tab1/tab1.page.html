@@ -27,69 +27,177 @@
       </div>
     </div>
   </div>
-  <!-- <ion-list>
-    <ion-searchbar *ngIf="!show" (ionChange)="Search($event)"></ion-searchbar>
-
-    <ion-item lines="none" *ngFor="let order of orders; let i = index">
-      <ion-card *ngIf="!show" style="border-radius: 18px; width: 95%">
-        <ion-card-header (click)="view(order, i)">
-          <ion-card-title
-            style="font-family: Semi-bold"
-            *ngIf="order.order_flower == 'Generated Flower Bouquet'"
-            >CUSTOM (For {{order.order_payment}})</ion-card-title
-          >
-
-          <ion-card-title
-            style="font-family: Semi-bold"
-            *ngIf="order.order_flower != 'Generated Flower Bouquet'"
-            >QUICK (For {{order.order_payment}})</ion-card-title
-          >
-          <ion-card-subtitle
-            >{{order.user_firstname}} {{order.user_lastname}}</ion-card-subtitle
-          >
-
-          <ion-card-subtitle
-            >{{order.order_date}} {{order.order_time}}</ion-card-subtitle
-          >
-          <ion-card-subtitle>{{order.order_contact}}</ion-card-subtitle>
-        </ion-card-header>
-        <br />
-
-        <ion-card-content>
-          <ion-grid class="ion-no-padding">
-            <ion-row>
-              <ion-col class="ion-text-left">
-                <h1>₱ {{order.order_totalprice| number:'1.2-2'}}</h1>
-              </ion-col>
-              <ion-col class="ion-text-right">
-                <h3 style="font-family: Semi-bold; padding: 5px">
-                  {{order.order_status}}
-                </h3>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col class="ion-text-left">
-
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-    </ion-item>
-  </ion-list> -->
 
   <div class="main-content">
     <div class="header bg-gradient-primary pb-4 pt-5 pt-md-8">
       <div class="container-fluid">
         <h2 class="mb-3">ORDERS</h2>
+
+        <ion-segment [(ngModel)]="selectedTabs">
+          <ion-segment-button value="verifying">
+            <ion-label>Verifying</ion-label>
+          </ion-segment-button>
+
+          <ion-segment-button value="paid">
+            <ion-label>Paid</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="ready">
+            <ion-label>Ready</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+        <br />
         <ion-searchbar
           *ngIf="!show"
           (ionChange)="Search($event)"
         ></ion-searchbar>
         <br />
-        <div class="header-body">
+
+        <!-- Verifying -->
+
+        <div class="header-body" *ngIf="selectedTabs == 'verifying'">
           <div class="row" *ngFor="let order of orders; let i = index">
-            <div class="card card-stats mb-4 mb-xl-0">
+            <div
+              class="card card-stats mb-4 mb-xl-0"
+              *ngIf="order.order_status == 'Verifying Payment'"
+            >
+              <div class="card-body" (click)="view(order, i)">
+                <div class="row">
+                  <div class="col">
+                    <h5
+                      class="card-title text-uppercase text-muted mb-0"
+                      style="font-family: Semi-bold"
+                      *ngIf="order.order_flower == 'Generated Flower Bouquet'"
+                    >
+                      CUSTOM (For {{order.order_payment}})
+                    </h5>
+                    <h5
+                      class="card-title text-uppercase text-muted mb-0"
+                      style="font-family: Semi-bold"
+                      *ngIf="order.order_flower != 'Generated Flower Bouquet'"
+                    >
+                      QUICK (For {{order.order_payment}})
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0"
+                      >{{order.user_firstname}} {{order.user_lastname}}</span
+                    >
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="icon icon-shape text-white rounded-circle shadow"
+                      style="background-color: #44dcb6"
+                    >
+                      <ion-icon name="flower-outline" size="large"></ion-icon>
+                    </div>
+                    <div
+                      class="
+                        icon icon-shape
+                        text-white
+                        rounded-circle
+                        shadow
+                        ml-1
+                      "
+                      style="background-color: #44dcb6"
+                    >
+                      <ion-icon
+                        name="arrow-up-outline"
+                        *ngIf="order.order_payment == 'Pick Up'"
+                        size="large"
+                      ></ion-icon>
+                      <ion-icon
+                        name="car-outline"
+                        *ngIf="order.order_payment == 'Delivery'"
+                        size="large"
+                      ></ion-icon>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                  <span class="text-success mr-2"
+                    ><i class="fa fa-arrow-up"></i> {{order.order_date | date}}
+                  </span>
+                  <span class="text-nowrap">at {{order.order_time}}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paid -->
+        <div class="header-body" *ngIf="selectedTabs == 'paid'">
+          <div class="row" *ngFor="let order of orders; let i = index">
+            <div
+              *ngIf="order.order_status == 'Paid' || order.order_status == 'paid' "
+              class="card card-stats mb-4 mb-xl-0"
+            >
+              <div class="card-body" (click)="view(order, i)">
+                <div class="row">
+                  <div class="col">
+                    <h5
+                      class="card-title text-uppercase text-muted mb-0"
+                      style="font-family: Semi-bold"
+                      *ngIf="order.order_flower == 'Generated Flower Bouquet'"
+                    >
+                      CUSTOM (For {{order.order_payment}})
+                    </h5>
+                    <h5
+                      class="card-title text-uppercase text-muted mb-0"
+                      style="font-family: Semi-bold"
+                      *ngIf="order.order_flower != 'Generated Flower Bouquet'"
+                    >
+                      QUICK (For {{order.order_payment}})
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0"
+                      >{{order.user_firstname}} {{order.user_lastname}}</span
+                    >
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="icon icon-shape text-white rounded-circle shadow"
+                      style="background-color: #44dcb6"
+                    >
+                      <ion-icon name="flower-outline" size="large"></ion-icon>
+                    </div>
+                    <div
+                      class="
+                        icon icon-shape
+                        text-white
+                        rounded-circle
+                        shadow
+                        ml-1
+                      "
+                      style="background-color: #44dcb6"
+                    >
+                      <ion-icon
+                        name="arrow-up-outline"
+                        *ngIf="order.order_payment == 'Pick Up'"
+                        size="large"
+                      ></ion-icon>
+                      <ion-icon
+                        name="car-outline"
+                        *ngIf="order.order_payment == 'Delivery'"
+                        size="large"
+                      ></ion-icon>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                  <span class="text-success mr-2"
+                    ><i class="fa fa-arrow-up"></i> {{order.order_date | date}}
+                  </span>
+                  <span class="text-nowrap">at {{order.order_time}}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ready -->
+        <div class="header-body" *ngIf="selectedTabs == 'ready'">
+          <div class="row" *ngFor="let order of orders; let i = index">
+            <div
+              class="card card-stats mb-4 mb-xl-0"
+              *ngIf="order.order_status == 'Ready' || order.order_status == 'ready' "
+            >
               <div class="card-body" (click)="view(order, i)">
                 <div class="row">
                   <div class="col">

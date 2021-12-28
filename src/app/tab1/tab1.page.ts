@@ -12,6 +12,8 @@ import { ViewPage } from '../view/view.page';
 export class Tab1Page {
   orders: any = [];
 
+  selectedTabs = 'verifying';
+
   show: boolean = false;
 
   constructor(

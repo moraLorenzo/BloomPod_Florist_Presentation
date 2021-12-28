@@ -14,6 +14,8 @@ export class Tab4Page implements OnInit {
   orders: any = [];
 
   show: boolean = false;
+
+  selectedTabs = 'completed';
   constructor(
     private dataService: DataService,
     private router: Router,
@@ -30,7 +32,7 @@ export class Tab4Page implements OnInit {
 
   getAll() {
     this.dataService
-      .processData(btoa('getCompleted').replace('=', ''), null, 2)
+      .processData(btoa('getAllOrdersOwner').replace('=', ''), null, 2)
       .subscribe(
         (dt: any) => {
           // console.log(dt.a);

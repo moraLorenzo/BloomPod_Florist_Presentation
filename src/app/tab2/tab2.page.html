@@ -52,6 +52,15 @@
           <div class="row" *ngFor="let flower of flowers; let i = index">
             <div class="card card-stats mb-4 mb-xl-0">
               <div class="card-body">
+                <div class="image-center">
+                  <center>
+                    <img
+                      (click)="update(flower,i)"
+                      src="http://bloompod.api.gc-ecommerceapp.com/bloompod_api/flowers/{{flower.flower_name}}.png"
+                    />
+                  </center>
+                </div>
+
                 <div class="row">
                   <div class="col">
                     <h5
@@ -65,12 +74,12 @@
                       }}</span
                     >
                   </div>
-                  <div class="col-auto">
+                  <!-- <div class="col-auto">
                     <img
                       (click)="update(flower,i)"
                       src="http://bloompod.api.gc-ecommerceapp.com/bloompod_api/flowers/{{flower.flower_name}}.png"
                     />
-                  </div>
+                  </div> -->
                 </div>
                 <p class="mt-3 mb-0 text-muted text-sm">
                   <ion-chip

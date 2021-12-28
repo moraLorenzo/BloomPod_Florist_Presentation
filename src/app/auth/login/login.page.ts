@@ -68,6 +68,10 @@ export class LoginPage implements OnInit {
     toast.present();
   }
 
+  navReg() {
+    this.router.navigate(['register']);
+  }
+
   onChange() {
     console.log(this.checkBox);
     this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
