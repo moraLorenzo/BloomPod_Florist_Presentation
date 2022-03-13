@@ -15,6 +15,9 @@ export class Tab4Page implements OnInit {
 
   show: boolean = false;
 
+  user_name = 'Username';
+  user_obj: any;
+
   selectedTabs = 'completed';
   constructor(
     private dataService: DataService,
@@ -27,6 +30,9 @@ export class Tab4Page implements OnInit {
   }
 
   ionViewWillEnter() {
+    // console.log(this.userService.getUser());
+    this.user_obj = this.userService.getUser();
+    this.user_name = this.user_obj.employee_username;
     this.getAll();
   }
 
@@ -37,6 +43,7 @@ export class Tab4Page implements OnInit {
         (dt: any) => {
           // console.log(dt.a);
           let load = this.dataService.decrypt(dt.a);
+          console.log(load);
 
           try {
             if (load.payload.orders) {

@@ -34,7 +34,7 @@ export class Tab1Page {
         (dt: any) => {
           // console.log(dt.a);
           let load = this.dataService.decrypt(dt.a);
-
+          console.log(load);
           try {
             if (load.payload.orders) {
               this.show = false;
